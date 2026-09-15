@@ -17,12 +17,12 @@ function render() {
     if (!tasks.length) column.append(element('p', 'Nenhuma tarefa.'));
     for (const task of tasks) {
       const card = element('article', '');
-      card.append(element('h3', task.title));
+      card.append(element('h3', task.title), element('p', 'Prioridade: ' + task.priority));
       const select = element('select', ''); select.setAttribute('aria-label', 'Status de ' + task.title);
       for (const value of statuses) { const option = element('option', value); select.append(option); }
       select.value = task.status;
       select.onchange = () => { manager.atualizar(task.id, { status: select.value }); save(); };
-      const edit = element('button', 'Editar'); edit.onclick = () => { editing = task.id; $('title').value = task.title; $('cancel').hidden = false; $('save').textContent = 'Salvar edição'; $('title').focus(); };
+      const edit = element('button', 'Editar'); edit.onclick = () => { editing = task.id; $('title').value = task.title; $('priority').value = task.priority; $('cancel').hidden = false; $('save').textContent = 'Salvar edição'; $('title').focus(); };
       const remove = element('button', 'Excluir'); remove.onclick = () => { removed = task; manager.excluir(task.id); if (editing === task.id) reset(); $('undo').hidden = false; save(); };
       card.append(select, edit, remove); column.append(card);
     }
@@ -32,7 +32,7 @@ function render() {
 $('form').onsubmit = event => {
   event.preventDefault(); $('error').textContent = '';
   try {
-    const data = { title: $('title').value };
+    const data = { title: $('title').value, priority: $('priority').value };
     if (editing) manager.atualizar(editing, data); else manager.criar(data);
     save(); reset();
   } catch (error) { $('error').textContent = error.message; }

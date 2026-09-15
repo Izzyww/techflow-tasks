@@ -30,3 +30,6 @@ Endereço local: http://localhost:3000. Encerramento: Ctrl+C.
 - npm run check: verifica a sintaxe dos arquivos JavaScript.
 
 O pipeline está configurado para executar ambas as verificações em push, pull request e acionamento manual. A configuração não comprova uma execução no GitHub. Os testes não cobrem toda a interface, segurança ou desempenho.
+
+## Mudança de escopo
+A mudança simulada acrescenta prioridade baixa, média e alta para destacar tarefas urgentes da logística. O impacto envolve um campo na tarefa, um seletor na interface, validação e um teste adicional. A versão atual inclui essa funcionalidade.

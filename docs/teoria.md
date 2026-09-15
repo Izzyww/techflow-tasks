@@ -14,11 +14,11 @@ A modelagem ajuda a entender o sistema antes e durante a programação. O diagra
 
 ## 4. Mudança de escopo
 
-A mudança de escopo simulada consiste em acrescentar prioridade baixa, média e alta às tarefas, permitindo identificar demandas urgentes da logística. Seu impacto envolve um campo na tarefa, um seletor na interface, validação e um teste adicional.
+A mudança de escopo simulada consiste em acrescentar prioridade baixa, média e alta às tarefas, permitindo identificar demandas urgentes da logística. Seu impacto envolve um campo na tarefa, um seletor na interface, validação e um teste adicional. A implementação atual inclui essa funcionalidade.
 
 ## 5. Testes automatizados e qualidade
 
-O projeto contém testes unitários com o executor nativo do Node.js e verificações de sintaxe com node --check. Os testes cobrem cadastro válido, título vazio, remoção de espaços, edição, mudança de status, exclusão e identificador inexistente. A configuração do GitHub Actions executa essas verificações em push, pull request ou acionamento manual. A existência dessa configuração não comprova sua execução. Testes unitários não substituem a conferência da interface e não garantem ausência total de defeitos.
+O projeto contém testes unitários com o executor nativo do Node.js e verificações de sintaxe com node --check. Os testes cobrem cadastro válido, título vazio, remoção de espaços, edição, mudança de status, exclusão, prioridade inválida e identificador inexistente. A configuração do GitHub Actions executa essas verificações em push, pull request ou acionamento manual. A existência dessa configuração não comprova sua execução. Testes unitários não substituem a conferência da interface e não garantem ausência total de defeitos.
 
 ## 6. Aplicação e reflexão
 

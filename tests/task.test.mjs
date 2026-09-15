@@ -28,6 +28,11 @@ test('exclui uma tarefa', () => {
   const g = new GerenciadorTarefas(); const t = g.criar({ title: 'Entrega' });
   g.excluir(t.id); assert.equal(g.listar().length, 0);
 });
+test('aceita prioridade alta e rejeita valor inválido', () => {
+  const g = new GerenciadorTarefas(); const t = g.criar({ title: 'Urgente', priority: 'Alta' });
+  assert.equal(t.priority, 'Alta');
+  assert.throws(() => g.atualizar(t.id, { priority: 'Urgentíssima' }));
+});
 test('rejeita atualização e exclusão de tarefa inexistente', () => {
   const g = new GerenciadorTarefas();
   assert.throws(() => g.atualizar('nao-existe', { title: 'Entrega' }));
