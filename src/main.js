@@ -1,9 +1,12 @@
 import { GerenciadorTarefas, statuses } from './taskModel.mjs';
-const manager = new GerenciadorTarefas();
+const key = 'techflow-tasks';
+const manager = new GerenciadorTarefas(JSON.parse(localStorage.getItem(key) || '[]'));
 let editing = null;
+let removed = null;
 const $ = id => document.getElementById(id);
 // textContent evita interpretar o título digitado como HTML.
 function element(tag, text) { const e = document.createElement(tag); e.textContent = text; return e; }
+function save() { localStorage.setItem(key, JSON.stringify(manager.listar())); render(); }
 function reset() { editing = null; $('form').reset(); $('cancel').hidden = true; $('save').textContent = 'Adicionar tarefa'; }
 function render() {
   $('board').replaceChildren();
@@ -18,9 +21,10 @@ function render() {
       const select = element('select', ''); select.setAttribute('aria-label', 'Status de ' + task.title);
       for (const value of statuses) { const option = element('option', value); select.append(option); }
       select.value = task.status;
-      select.onchange = () => { manager.atualizar(task.id, { status: select.value }); render(); };
+      select.onchange = () => { manager.atualizar(task.id, { status: select.value }); save(); };
       const edit = element('button', 'Editar'); edit.onclick = () => { editing = task.id; $('title').value = task.title; $('cancel').hidden = false; $('save').textContent = 'Salvar edição'; $('title').focus(); };
-      card.append(select, edit); column.append(card);
+      const remove = element('button', 'Excluir'); remove.onclick = () => { removed = task; manager.excluir(task.id); if (editing === task.id) reset(); $('undo').hidden = false; save(); };
+      card.append(select, edit, remove); column.append(card);
     }
     $('board').append(column);
   }
@@ -30,8 +34,9 @@ $('form').onsubmit = event => {
   try {
     const data = { title: $('title').value };
     if (editing) manager.atualizar(editing, data); else manager.criar(data);
-    reset(); render();
+    save(); reset();
   } catch (error) { $('error').textContent = error.message; }
 };
 $('cancel').onclick = reset;
+$('restore').onclick = () => { if (removed) { manager.tarefas.push(removed); removed = null; save(); } $('undo').hidden = true; };
 render();

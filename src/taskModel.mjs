@@ -25,4 +25,9 @@ export class GerenciadorTarefas {
     this.tarefas[index] = tarefa;
     return tarefa;
   }
+  excluir(id) {
+    const index = this.tarefas.findIndex(t => t.id === id);
+    if (index < 0) throw new Error('Tarefa não encontrada.');
+    this.tarefas.splice(index, 1);
+  }
 }
