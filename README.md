@@ -15,8 +15,18 @@ Requisito: Node.js 22 ou superior. Não há dependências externas de execução
 
 Endereço local: http://localhost:3000. Encerramento: Ctrl+C.
 
+## Estrutura
+- index.html: página do sistema
+- src/main.js: interface e persistência
+- src/taskModel.mjs: regras e classes
+- src/style.css: aparência
+- tests/task.test.mjs: testes unitários
+- docs/: documentação teórica e diagramas UML
+- .github/workflows/ci.yml: configuração do GitHub Actions
+- server.mjs: servidor local de arquivos
+
 ## Testes e controle de qualidade
 - npm test: executa os testes unitários com node:test.
 - npm run check: verifica a sintaxe dos arquivos JavaScript.
 
-Os testes não cobrem toda a interface, segurança ou desempenho.
+O pipeline está configurado para executar ambas as verificações em push, pull request e acionamento manual. A configuração não comprova uma execução no GitHub. Os testes não cobrem toda a interface, segurança ou desempenho.
