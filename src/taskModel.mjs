@@ -18,4 +18,11 @@ export class GerenciadorTarefas {
     this.tarefas.push(tarefa);
     return tarefa;
   }
+  atualizar(id, dados) {
+    const index = this.tarefas.findIndex(t => t.id === id);
+    if (index < 0) throw new Error('Tarefa não encontrada.');
+    const tarefa = new Tarefa({ ...this.tarefas[index], ...dados, id });
+    this.tarefas[index] = tarefa;
+    return tarefa;
+  }
 }
