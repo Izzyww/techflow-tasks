@@ -1,0 +1,11 @@
+{
+  "name": "techflow-tasks",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "check": "node --check src/main.js && node --check src/taskModel.mjs && node --check tests/task.test.mjs && node --check server.mjs"
+  }
+}
